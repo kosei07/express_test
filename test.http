@@ -1,0 +1,67 @@
+GET http://127.0.0.1:8000/user
+
+###
+
+POST http://127.0.0.1:8000/user
+Content-Type: application/json
+
+{
+    "name": "John",
+    "age": 23
+}
+
+###
+GET http://127.0.0.1:8000/user/62c46754806c14cfd203b109
+
+###
+DELETE http://127.0.0.1:8000/user/62c470de00feadf63db4c61a
+
+
+###
+
+PATCH http://127.0.0.1:8000/user/62c46754806c14cfd203b109
+Content-Type: application/json
+
+{
+    "age": 90
+}
+
+###
+
+GET http://127.0.0.1:8000/test
+
+###
+
+POST http://127.0.0.1:8000/test
+Content-Type: application/json
+
+{
+    "name": "tester",
+    "data": [
+        {"title":"test"}
+    ]
+}
+
+###
+DELETE http://127.0.0.1:8000/test/62c52a72ae7ad30b70a8656f
+
+
+###
+
+PATCH http://127.0.0.1:8000/test/62c55be68d103b9ac2a80023
+Content-Type: application/json
+
+{
+    "data": [
+        {
+            "title":"title1",
+            "memoData":[
+                {
+                    "length":200,
+                    "text":"qwertyuiopasdfghjklzxcvbnm"
+                    }
+            ]
+        }
+    ]
+}
+

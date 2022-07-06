@@ -4,9 +4,11 @@ const app = express();
 const mongoose = require('mongoose');
 const userRouter = require('./routes/user'); //追加
 const testRouter = require('./routes/test'); //追加
+const memoRouter = require('./routes/memo'); //追加
 
 app.use('/user', userRouter);　//追加
 app.use('/test', testRouter);　//追加
+app.use('/memo', memoRouter);　//追加
 
 
 const port = 8000; // listenするport番号
@@ -16,11 +18,6 @@ const options = {
 	useNewUrlParser : true
 }
 
-// app.use(cors({
-//     origin: 'http://localhost:3000/', //アクセス許可するオリジン
-//     credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
-//     optionsSuccessStatus: 200 //レスポンスstatusを200に設定
-// }))
 
 app.use((req, res, next) => {
 	res.setHeader("Access-Control-Allow-Origin", "*")

@@ -1,29 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const cors = require('cors');
-const User = require('../models/User');
+const Test = require('../models/Memo');
 
 router.use(express.json());
 router.use(cors({
-  origin: 'http://localhost:3000', //アクセス許可するオリジン
-  credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
-  optionsSuccessStatus: 200 //レスポンスstatusを200に設定
-}))
+    origin: 'http://localhost:3000', //アクセス許可するオリジン
+    credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
+    optionsSuccessStatus: 200 //レスポンスstatusを200に設定
+  }))
+  
 
 router.get('/', async (req, res) => {
 
-	const users = await User.find({});
-
-	res.json(users);
-
-  
+	const test = await Test.find({});
+	res.json(test);
 });
 
 
+
 router.post('/', async (req,res)=>{
-	const user = new User({
+	const user = new Test({
 		name: req.body.name,
-		age: req.body.age
+		data: req.body.data
 	});
 
 	const savedUser = await user.save();
@@ -33,7 +32,7 @@ router.post('/', async (req,res)=>{
 
 router.get('/:userID', (req, res) => {
     try {
-      User.findById(req.params.userID, (err, user) => {
+      Test.findById(req.params.userID, (err, user) => {
         if (err) res.status(404).json('ユーザは存在しません');
         res.send(user);
       });
@@ -48,14 +47,14 @@ router.get('/:userID', (req, res) => {
   });
 
   router.delete('/:userID',async (req,res)=>{
-	const user = await User.remove({_id: req.params.userID});
-	res.send(user);
+	const test = await Test.remove({_id: req.params.userID});
+	res.send(test);
 });
 
 router.patch('/:userID',async (req,res)=>{
 	console.log(req.body.age);
-	const user = await User.updateOne({_id: req.params.userID},{$set:{age:req.body.age}});
-	res.send(user);
+	const test = await Test.updateOne({_id: req.params.userID},{$set:{data:req.body.data}});
+	res.send(test);
 });
 
 module.exports = router;
